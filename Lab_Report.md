@@ -85,25 +85,25 @@
 ### 1. Đánh giá Team Health (Thang 1-5)
 | Khía cạnh | Phước | Hải | Nam | Trung bình |
 | :--- | :---: | :---: | :---: | :---: |
-| Chất lượng AI | 3 | 4 | 3 | **3.3** |
-| Tiến độ | 4 | 4 | 5 | **4.3** |
-| Tinh thần team | 5 | 5 | 5 | **5.0** |
-| Tốc độ ra sản phẩm | 4 | 4 | 4 | **4.0** |
+| Chất lượng AI | 3.5 | 3.0 | 3.0 | **3.17** |
+| Tiến độ | 4.0 | 3.5 | 3.5 | **3.67** |
+| Tinh thần team | 4.5 | 4.5 | 4.0 | **4.33** |
+| Tốc độ ra sản phẩm | 3.5 | 3.0 | 3.5 | **3.33** |
 
 ### 2. Chọn vấn đề ưu tiên
-*   **Khía cạnh thấp nhất:** Chất lượng AI (Trung bình 3.3).
-*   **Lý do:** Team code MVP nhanh nhưng chưa có tập dữ liệu test chuẩn, tiềm ẩn rủi ro Hallucination và loại sai ứng viên (False Negative).
+*   **Khía cạnh thấp nhất:** Chất lượng AI (Trung bình 3.17).
+*   **Lý do:** Thiếu quy trình kiểm thử chất lượng AI (Eval Pipeline) tự động. Mỗi khi tinh chỉnh prompt, team phải test tay từng CV dẫn đến tốc độ chậm và không chắc chắn bản mới có làm hỏng các case đã chạy tốt trước đó hay không.
 *   **Ảnh hưởng:** Nếu không xử lý, HR Head sẽ từ chối dùng Pilot vì không tin tưởng độ chính xác của Agent.
 
 ### 3. Chọn Competency cần nâng cấp
 *   **Role:** AI/Data Engineer (Nam)
 *   **Level hiện tại:** Gần L2 — AI Practitioner (Biết gọi API và viết Prompt).
 *   **Năng lực cần nâng:** Evals / Quality Evaluation (Kiểm định và đánh giá).
-*   **Action trong 30 ngày:** Xây dựng bộ test set 300 CV và setup Eval Pipeline chạy tự động mỗi lần update mô hình.
+*   **Action trong 30 ngày:** Xây dựng một bộ dataset chuẩn gồm 30 "Golden Test Cases" (chứa cả CV dễ, CV phức tạp, CV bẫy) kèm ground-truth đánh giá của chuyên viên nhân sự; tích hợp script tự động chấm điểm độ chính xác (Accuracy/Precision) sau mỗi lần cập nhật pipeline.
 
 ### 4. Growth Plan 30 ngày
 | Vấn đề ưu tiên | Hành động 30 ngày | Owner | Deadline | Dấu hiệu hoàn thành |
 | :--- | :--- | :--- | :--- | :--- |
-| **Thiếu Eval Pipeline** | Thuê CTV dán nhãn 300 CV. Code module test tự động so sánh output của Agent với nhãn. | **Nam** | 15/10/2026 | Output ra file CSV tính được chính xác % False Negative. |
-| **Rubric chưa chuẩn** | Làm việc với HR Head để map tiêu chí thủ công thành Prompt Rubric có trọng số. | **Hải** | 08/10/2026 | Ra tài liệu "CV Scoring Rubric" có confirm của HR. |
-| **Rủi ro lộ PII** | Code Module Data Masking chặn 100% PII (Tên, SDT, Email) trước khi gọi API. | **Phước**| 22/10/2026 | Log API chứng minh không có PII nào lọt ra ngoài. |
+| **1. Đánh giá chất lượng AI thiếu ổn định** | Xây dựng bộ 30 Golden Cases & viết script chạy test tự động độ lệch đánh giá (Eval Script) trước mỗi đợt deploy. | **Nam** | 15/09/2026 | Bộ file eval_golden_dataset.json hoàn chỉnh và script trả về báo cáo % Match Rate tự động trong terminal. |
+| **2. Tốc độ đưa bản cập nhật cho HR test còn chậm** | Đóng gói bản cập nhật backend thành API chuẩn và cấu hình 1 trang Web Demo trực tiếp trên môi trường staging. | **Phước** | 20/09/2026 | Link demo web hoạt động ổn định; Recruiter tải CV lên và nhận kết quả phân tích trong $\le 15$ giây. |
+| **3. Phản hồi của HR chưa được tổng hợp định kỳ** | Tổ chức buổi "Weekly Feedback Sync" 20 phút vào mỗi 16:00 Thứ Sáu với HR đối tác để ghi nhận các trường hợp AI chấm sai. | **Hải** | 25/09/2026 | File log ghi nhận ít nhất 10 feedback thực tế kèm phân loại lỗi (Lỗi trích xuất / Lỗi chấm điểm). |

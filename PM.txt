@@ -1,0 +1,365 @@
+﻿Bản phân công công việc chi tiết và nội dung mẫu chuẩn hóa cho team 3 người (Phước, Hải, Nam) thực hiện dự án Hệ thống AI Agent hỗ trợ HR lọc CV theo đúng các cổng kiểm soát (Gates).
+Phân công vai trò & Nhiệm vụ cá nhân
+* Phước (Tech Lead & Repo Owner): Chịu trách nhiệm tạo/quản lý GitHub Repo, làm RACI Matrix, thiết kế kiến trúc AI Team và tổng hợp file PDF nộp bài.
+* Hải (Product Lead / Domain Lead): Chịu trách nhiệm chốt Scope, dựng Stakeholder Map, xây dựng Pitch (Conclusion First) và chiến lược xử lý Blocker/Supporter.
+* Nam (AI/Data Engineer & Operations): Chịu trách nhiệm đánh giá Capability Gap, thẩm định tính khả thi của mô hình AI, đo lường Team Health và xây Growth Plan 30 ngày.
+Phase 0: Chốt phạm vi (Scope & Setup)
+* Tên dự án: Hệ thống AI Agent hỗ trợ HR lọc & đánh giá CV (Auto-CV Screener Agent).
+* Mục tiêu (1–3 tháng tới): Hoàn thiện MVP AI Agent phân tích ngữ nghĩa CV match với Job Description (JD), đạt độ chính xác tương đồng chuyên viên tuyển dụng ≥85%, giảm 70% thời gian sàng lọc sơ loại trên tập dữ liệu thử nghiệm 200 CV.
+* Repo Owner: Phước (Tạo Git repo, khởi tạo README.md theo cấu trúc chuẩn).
+* Format làm bài: Google Docs/Slides → Xuất 01 file PDF tối đa 4 trang.
+Phase 1: Stakeholder Map & 4 Chiến lược cụ thể
+Ma trận Stakeholder (6 đối tượng chính)
+Stakeholder
+	Vị trí (Influence × Interest)
+	Nhãn Quadrant
+	Stance thực tế
+	Mối quan tâm chính
+	Trưởng phòng Nhân sự (HR Head - Doanh nghiệp Pilot)
+	Cao × Cao
+	Champion
+	Ủng hộ
+	Giảm tải cho team tuyển dụng, độ chính xác khi match CV với JD
+	Giảng viên hướng dẫn / Mentor AI
+	Cao × Cao
+	Champion
+	Ủng hộ
+	Tính ứng dụng, kiến trúc kỹ thuật chuẩn (RAG/Agent), tiến độ bài lab
+	Chuyên viên Bảo mật & Pháp chế (IT Security / Legal)
+	Cao × Thấp
+	Blocker
+	Chưa ủng hộ
+	Rủi ro lộ dữ liệu PII ứng viên (SĐT, CCCD, địa chỉ), tuân thủ Nghị định 13
+	Tech Lead / Giám đốc Công nghệ (bên Pilot)
+	Cao × Thấp
+	Blocker
+	Trung lập
+	Chi phí API token (LLM), độ trễ hệ thống, rủi ro ảo giác (hallucination)
+	Recruiter trực tiếp sử dụng (HR Executive)
+	Thấp × Cao
+	Supporter
+	Ủng hộ
+	Giao diện dễ dùng, AI giải thích rõ lý do Pass/Fail của ứng viên
+	Ứng viên nộp CV
+	Thấp × Thấp
+	Bystander
+	Trung lập
+	Tính công bằng, không bị loại oan bởi thuật toán tự động
+	4 Chiến lược hành động cụ thể (1–2 tuần tới)
+1. HR Head (Champion - Tận dụng):
+   * Tác động: Cung cấp 50 bộ JD và 200 CV ẩn danh thực tế để test benchmark; mở đường ký pilot chính thức.
+   * Hành động: Hải gửi bản demo pipeline trích xuất thông tin trước thứ Năm, đặt lịch 30 phút thứ Sáu để thống nhất tiêu chí đánh giá năng lực (rubric).
+2. Mentor / Giảng viên (Champion - Tận dụng):
+   * Tác động: Bảo chứng kỹ thuật, góp ý kiến trúc multi-agent.
+   * Hành động: Phước gửi tài liệu AI Architecture và kết quả đo lường độ trễ qua email trước 18:00 Chủ Nhật; xin 15 phút phản biện sau buổi học.
+3. IT Security / Legal (Blocker - Hóa giải rủi ro):
+   * Tác động: Có quyền phủ quyết không cho phép kết nối hệ thống dữ liệu doanh nghiệp.
+   * Hành động: Nam dựng module tiền xử lý làm sạch (masking) 100% PII trước khi đưa vào LLM; viết tài liệu giải trình cơ chế Data Privacy (Local Processing/Zero-data retention) gửi duyệt trước thứ Ba tuần tới.
+4. Tech Lead bên Pilot (Blocker - Thuyết phục chi phí & độ ổn định):
+   * Tác động: Lo ngại hệ thống quá tốn kém chi phí vận hành token và khó tích hợp.
+   * Hành động: Phước xây bảng tính Unit Economics (chi phí token trung bình/CV ≤0.02$) kèm cơ chế fallback (dùng open-source model chạy local) để trình bày trong buổi sync kỹ thuật tuần tới.
+Phân công hành động cho các Phase tiếp theo (2, 3, 4)
+* Phase 2 (Pitch & RACI):
+   * Hải: Viết Pitch (Conclusion First) gửi HR Head & IT Security (tập trung vào ROI và Data Safety).
+   * Phước: Thiết lập bảng RACI cho 5 đầu việc kỹ thuật & dữ liệu.
+* Phase 3 (AI Team Design):
+   * Phước: Vẽ sơ đồ Hybrid Team (AI Core + Product Integration).
+   * Nam: Phân tích Capability Gap (thiếu chuyên gia Prompt/Eval) và đề xuất phương án Outsource/Partner.
+* Phase 4 (Team Health & 30-Day Growth Plan):
+   * Nam: Lập bảng đánh giá sức khỏe team theo L1/L2/L3 Competency và thiết lập bảng Action Plan có Owner + Deadline cụ thể.
+   * Cả 3 thành viên: Review chéo và Phước xuất file PDF hoàn thiện nộp repo.
+Bạn có muốn điều chỉnh lại chức danh thực tế hoặc phạm vi kỹ thuật của mô hình (ví dụ: dùng OpenAI API hay LLM mã nguồn mở chạy local) để các chiến lược và bảng RACI khớp chính xác hơn với bài nộp của nhóm không?
+
+
+—---------------------------------------------------------------------------------------------------------
+
+
+Dưới đây là bảng phân chia công việc chi tiết và nội dung mẫu hoàn chỉnh cho Phase 2 (Pitch & RACI Matrix) dành cho 3 thành viên: Phước, Hải, Nam.
+PHÂN CHIA CÔNG VIỆC TRONG PHASE 2 (30 PHÚT)
+* Hải (Product Lead):
+   * Chủ trì chốt nội dung Pitch nháp theo cấu trúc Conclusion First gửi HR Head (Champion).
+   * Tổng hợp các phiên bản cá nhân để chốt bản Pitch chính thức (Trang 2).
+* Nam (AI/Data Engineer):
+   * Xây dựng kịch bản Phản biện (Objection Handling) về độ chính xác và rủi ro bias/hallucination của AI bằng số liệu thực tế.
+   * Soạn thảo Pitch góc nhìn Data/Kỹ thuật ở bước viết cá nhân.
+* Phước (Tech Lead):
+   * Chủ trì thiết lập RACI Matrix cho 6 công việc trọng tâm của dự án (đảm bảo tuân thủ nguyên tắc: Mỗi dòng chỉ có duy nhất 1 A).
+   * Định dạng và đưa toàn bộ nội dung đạt Gate 2 vào tài liệu chung.
+CHI TIẾT NỘI DUNG THỰC HIỆN PHASE 2
+1. Bản Pitch chuẩn hóa: Cấu trúc "Kết luận trước" (Conclusion First)
+Đối tượng nhận Pitch: Trưởng phòng Nhân sự (HR Head - Doanh nghiệp Pilot)
+* Kết luận / Đề xuất (Conclusion First):
+Chúng tôi đề xuất triển khai thử nghiệm hệ thống AI Agent Sàng lọc CV tự động trong 2 tuần trên 01 vị trí tuyển dụng thực tế (dự kiến 50 CV) nhằm giúp team Tuyển dụng cắt giảm 70% thời gian đọc CV sơ loại mà vẫn đảm bảo giữ chân các ứng viên tiềm năng nhất.
+* 2–3 Lý do chính (Reasons):
+   1. Tiết kiệm nguồn lực: Recruiter hiện mất trung bình 3–5 phút/CV; AI Agent rút ngắn xuống dưới 15 giây/CV kèm bản tóm tắt điểm mạnh/yếu.
+   2. Đánh giá đa chiều, phi từ khóa: Không chỉ khớp từ khóa cứng, Agent đọc hiểu ngữ cảnh kinh nghiệm, dự án và kỹ năng mềm theo đúng tiêu chí (Rubric) của HR.
+   3. Bảo mật & minh bạch: 100% dữ liệu định danh (PII) được ẩn danh hóa trước khi xử lý, có trích dẫn nguồn bằng chứng từ CV giải thích vì sao ứng viên Đạt/Không đạt.
+   * Bằng chứng / Số liệu (Evidence):
+Bản thử nghiệm nội bộ (Benchmark Test) trên 100 CV mẫu cho thấy độ tương đồng đánh giá giữa AI và Chuyên viên tuyển dụng đạt 86%, không bỏ sót ứng viên đạt chuẩn (False Negative < 5%), chi phí vận hành chỉ ~0.015 USD / CV.
+   * Small Ask (Đề nghị hành động nhỏ tiếp theo):
+Chúng tôi xin phép HR Head chia sẻ 01 bản Mô tả công việc (JD) thực tế đang tuyển kèm tiêu chí ưu tiên để team cấu hình Agent và gửi lại kết quả chạy thử nghiệm 10 CV mẫu trước 17:00 Thứ Sáu tuần này.
+2. Kịch bản Phản biện & Cách xử lý (Objection Handling)
+      * Phản biện có khả năng xảy ra nhất:
+"AI đọc CV dễ bị 'ảo giác' (hallucination), bỏ sót ứng viên giỏi hoặc thiên vị (bias) theo tuổi tác/giới tính, gây rủi ro uy tín tuyển dụng."
+      * Câu trả lời xử lý dựa trên bằng chứng / hành động kỹ thuật:
+         * Kỹ thuật Masking & Rubric Scoring: Hệ thống tự động làm sạch (mask) tên, ngày sinh, giới tính, trường học trước khi đánh giá; chỉ chấm điểm dựa trên Ma trận năng lực (Rubric) cố định.
+         * Cơ chế Human-in-the-loop: AI Agent không tự động từ chối ứng viên mà chỉ đóng vai trò phân loại (Tier 1 - Phù hợp cao, Tier 2 - Cần cân nhắc, Tier 3 - Không phù hợp) kèm đoạn trích dẫn trực tiếp từ CV làm căn cứ. Recruiter luôn là người bấm nút duyệt cuối cùng.
+3. Bảng phân công RACI Matrix (6 công việc cốt lõi trong 1–2 tháng tới)
+Quy tắc chuẩn: R = Người làm chính, A = Người chịu trách nhiệm kết quả cuối cùng (Duy nhất 1 A/dòng), C = Người hỏi ý kiến, I = Người nhận thông báo.
+STT
+	Công việc trọng tâm (Tasks)
+	Hải (Product / PM)
+	Phước (Tech Lead)
+	Nam (AI/Data Eng)
+	Stakeholder (HR Head / Mentor)
+	1
+	Xác định Use Case & Rubric chấm CV
+	A
+	C
+	C
+	C (HR Head)
+	2
+	Xây dựng Data Pipeline & Masking PII
+	I
+	C
+	A (kiêm R)
+	I (IT Security)
+	3
+	Phát triển Core AI Agent & Prompting
+	C
+	A
+	R
+	I
+	4
+	Đánh giá Benchmark & Giảm Hallucination
+	C
+	C
+	A (kiêm R)
+	C (Mentor AI)
+	5
+	Thiết kế UI/UX & Tích hợp Demo Web
+	C
+	A (kiêm R)
+	I
+	I
+	6
+	Chạy Pilot thực tế & Đánh giá kết quả
+	A (kiêm R)
+	I
+	C
+	I (Recruiter/HR)
+	TỰ KIỂM TRA (GATE 2 CHECKLIST)
+         * [x] Pitch: Có kết luận trước $\rightarrow$ Lý do $\rightarrow$ Bằng chứng/số liệu $\rightarrow$ Small ask cụ thể.
+         * [x] Objection: Có 1 phản biện thực tế và giải pháp kỹ thuật/quy trình xử lý rõ ràng.
+         * [x] RACI: Đủ 6 công việc then chốt, mỗi hàng có duy nhất 1 Accountable (A) rõ ràng, phân định minh bạch giữa R và A.
+—-------------------------------------------------------------------------------------------
+Bảng phân chia công việc chi tiết và nội dung mẫu hoàn chỉnh cho **Phase 3 (Thiết kế AI Team)** cho 3 thành viên **Phước, Hải, Nam**.
+
+
+---
+
+
+### PHÂN CHIA CÔNG VIỆC TRONG PHASE 3 (25 PHÚT)
+
+
+* **Phước (Tech Lead):**
+* Chủ trì lựa chọn và viết luận điểm cho **AI Team Architecture** phù hợp với team 3 người làm sản phẩm AI.
+* Xác định ranh giới giữa **Core Roles (cần ngay)** và **Extended Roles (khi scale)**; chốt câu **Squad Goal**.
+
+
+
+
+* **Hải (Product Lead):**
+* Xác định **Capability Gap về Domain Knowledge (HR Recruitment Rubrics)** & **Legal/Compliance**.
+* Lập luận phương án **Partner** với HR Experts/Doanh nghiệp để giải quyết bài toán nghiệp vụ mà không cần tuyển dụng full-time.
+
+
+
+
+* **Nam (AI/Data Engineer):**
+* Xác định **Capability Gap về AI Evaluation/Benchmark Pipeline** & **Data Annotation**.
+* Lập luận phương án **Outsource/Tooling** hoặc **Hire** cho khâu dán nhãn dữ liệu đánh giá CV thực tế.
+
+
+
+
+
+
+---
+
+
+### CHI TIẾT NỘI DUNG THỰC HIỆN PHASE 3 (TRANG 3 BÀI NỘP)
+
+
+#### 1. Lựa chọn AI Team Architecture
+
+
+* **Mô hình lựa chọn:** **Embedded AI Team (Năng lực AI nhúng trực tiếp trong team sản phẩm).**
+* **Giải thích lý do lựa chọn:**
+> Với quy mô tinh gọn (3 người) ở giai đoạn xây dựng MVP từ 0 lên 1, mô hình Embedded giúp kỹ sư AI (Nam), kỹ sư hệ thống/Fullstack (Phước) và Product Lead (Hải) làm việc chung một luồng (single backlog), loại bỏ hoàn toàn độ trễ bàn giao (handoff friction) giữa nghiên cứu AI và triển khai sản phẩm, phản hồi và tinh chỉnh thuật toán lọc CV ngay theo feedback thực tế của người dùng.
+
+
+
+
+
+
+---
+
+
+#### 2. Core Roles & Extended Roles
+
+
+```
+[Core Roles - Hiện tại (MVP)]
+├── Product & Domain Lead (Hải)       : Chốt UX flow, định nghĩa tiêu chí/Rubric lọc CV
+├── Fullstack & Architecture Lead (Phước): Backend API, Security/PII Masking, Tích hợp UI
+└── AI/Data Engineer (Nam)            : Agent Workflow, Prompt/RAG Pipeline, Evaluation
+
+
+[Extended Roles - Khi Scale (Giai đoạn Post-Pilot / Tăng trưởng)]
+├── MLOps & LLM Observability Engineer : Giám sát chi phí token, latency, drift model theo thời gian
+├── AI Legal & Data Compliance Officer : Kiểm soát tuân thủ bảo vệ dữ liệu PII và luật lao động
+└── Forward Deployed Engineer (FDE)    : Tùy biến tích hợp Agent vào hệ thống ATS nội bộ của khách hàng
+
+
+```
+
+
+* **Core Roles (Cần ngay ở giai đoạn MVP):**
+* *AI Product & Domain Lead (Hải):* Xác định bài toán, xây dựng rubric chấm CV chuẩn hóa, đo lường sự hài lòng của Recruiter.
+* *AI Core & Data Engineer (Nam):* Xây dựng prompt templates, luồng Agent, benchmark độ chính xác và giảm thiểu rủi ro ảo giác (hallucination).
+* *Fullstack & System Architect (Phước):* Xây dựng API pipeline, module bảo mật ẩn danh hóa (PII masking) và giao diện trực quan cho HR.
+
+
+
+
+* **Extended Roles (Chỉ bổ sung khi mở rộng/scale):**
+* *MLOps & LLMOps Specialist:* Quản lý caching, token optimization, monitoring drift khi số lượng CV vượt mốc 10.000 CV/tháng.
+* *Legal & Data Privacy Specialist:* Đảm bảo tuân thủ nghiêm ngặt các quy định về dữ liệu nhân sự và chống phân biệt đối xử (bias) trong tuyển dụng.
+
+
+
+
+
+
+---
+
+
+#### 3. Priority Resourcing (Xử lý 3 Capability Gaps lớn nhất)
+
+
+| Capability Gap (Thiếu hụt năng lực) | Phương án giải quyết | Lý do lựa chọn (Vì sao) | Thời điểm cần |
+| --- | --- | --- | --- |
+| **1. Domain Expertise về Đánh giá Nhân sự (HR Rubrics)** | **Partner** | Không cần tuyển HR full-time vào team tech; hợp tác với 2-3 HR Lead tại các công ty pilot để chuẩn hóa bộ tiêu chí đánh giá cho từng nhóm ngành (IT, Sales, Marketing). | **Cần ngay trước khi chạy Pilot (Tuần 1-2)** |
+| **2. Dữ liệu gán nhãn & Benchmark CV thực tế** | **Outsource** | Thuê cộng tác viên HR/Recruiter part-time gán nhãn ground-truth cho 300 CV mẫu để đối chuẩn (benchmark) với AI; chi phí thấp hơn nhiều so với tuyển dụng. | **Cần trong giai đoạn kiểm thử mô hình (Tuần 3)** |
+| **3. Kiểm định Pháp lý & Bảo mật dữ liệu PII (Compliance)** | **Partner** | Hợp tác xin tư vấn (advisory) từ bộ phận Pháp chế/IT Security của chính doanh nghiệp đối tác pilot để rà soát quy trình xử lý dữ liệu. | **Cần trước khi đưa hệ thống vào chạy thật (Tuần 4)** |
+
+
+---
+
+
+#### 4. Squad Goal (Mục tiêu tối thượng của Team)
+
+
+> *"Team của chúng tôi sở hữu **toàn bộ luồng xử lý AI Agent và giao diện hỗ trợ sàng lọc ứng viên** và chịu trách nhiệm đưa **quy trình lọc CV thủ công tốn thời gian của HR** từ hiện trạng **đọc tay 5 phút/CV với tỷ lệ quá tải cao** đến **trạng thái tự động phân loại sơ loại chính xác $\ge 85\%$ chỉ trong 15 giây/CV kèm trích dẫn lý do minh bạch trước ngày 30/09/2026**."*
+
+
+---
+
+
+### TỰ KIỂM TRA (GATE 3 CHECKLIST)
+
+
+* [x] **Architecture:** Đã chọn **Embedded**, có 1-2 câu giải thích rõ tính phù hợp với giai đoạn MVP 3 người.
+* [x] **Role Distinction:** Phân định rõ Core Roles (cần ngay) vs Extended Roles (khi scale).
+* [x] **Priority Resourcing:** Giải thích rõ 3 Capability Gaps gắn với **Partner / Outsource**, kèm lý do kinh tế và mốc thời gian rõ ràng.
+* [x] **Squad Goal:** Đúng cú pháp một câu mạch lạc, đầy đủ "Sở hữu gì", "Đưa cái gì", "Từ đâu" đến "Đích đến nào".
+
+
+
+
+—----------------------------------------
+Bảng phân chia công việc chi tiết và nội dung mẫu hoàn chỉnh cho Phase 4 (Team Health & Growth Plan 30 ngày) dành cho 3 thành viên: Phước, Hải, Nam.
+
+
+PHÂN CHIA CÔNG VIỆC TRONG PHASE 4 (25 PHÚT)
+         * Nam (AI/Data Engineer):
+         * 
+            * Tổng hợp bảng điểm Team Health từ cả 3 thành viên; phân tích nguyên nhân gốc rễ (Root Cause) về sự chênh lệch điểm số ở khía cạnh Chất lượng AI / Tiến độ.
+            *             * Xây dựng mục Nâng cấp Competency Framework (L2 $\rightarrow$ L3) cho mảng AI Evaluation/Prompting.
+            *             * Hải (Product Lead):
+            * 
+               * Chủ trì đánh giá khía cạnh Tốc độ ra sản phẩm và Tinh thần team.
+               *                * Thiết lập hành động chuẩn hóa quy trình tiếp nhận phản hồi (User Feedback Loop) từ phía Recruiter vào kế hoạch Growth Plan.
+               *                * Phước (Tech Lead):
+               * 
+                  * Chốt bảng Growth Plan 30 ngày (đảm bảo đủ 3 hành động then chốt với Owner, Deadline, và Dấu hiệu hoàn thành đo lường được).
+                  *                   * Tổng kết Gate 4 và chuẩn bị đóng gói file PDF 4 trang hoàn chỉnh cho toàn bộ Lab.
+                  * CHI TIẾT NỘI DUNG THỰC HIỆN PHASE 4 (TRANG 4 BÀI NỘP)
+1. Đánh giá Team Health (Thang điểm 1–5)
+Khía cạnh đánh giá
+	Điểm Phước
+	Điểm Hải
+	Điểm Nam
+	Điểm TB
+	Nhận xét & Đánh giá hiện trạng
+	1. Chất lượng AI
+	3.5
+	3.0
+	3.0
+	3.17
+	Thấp nhất: Agent thỉnh thoảng trích xuất thiếu thông tin CV có layout phức tạp; chưa có bộ test case cố định để đo độ chính xác sau mỗi lần đổi prompt.
+	2. Tiến độ cam kết
+	4.0
+	3.5
+	3.5
+	3.67
+	Khá ổn định, nhưng khâu gán nhãn dữ liệu chuẩn bị trễ hơn dự kiến 2 ngày.
+	3. Tinh thần team
+	4.5
+	4.5
+	4.0
+	4.33
+	Giao tiếp cởi mở, dám nêu rủi ro kỹ thuật, phân chia đầu việc rõ ràng.
+	4. Tốc độ ra sản phẩm
+	3.5
+	3.0
+	3.5
+	3.33
+	Chênh lệch nhiều nhất: Chưa có luồng tự động để đưa bản prompt/cải tiến AI mới nhất lên bản demo web cho HR test ngay.
+	                  * Vấn đề cốt lõi cần giải quyết ngay:
+                  * 
+                  * Thiếu quy trình kiểm thử chất lượng AI (Eval Pipeline) tự động. Mỗi khi tinh chỉnh prompt, team phải test tay từng CV dẫn đến tốc độ chậm và không chắc chắn bản mới có làm hỏng các case đã chạy tốt trước đó hay không.
+                  * 2. Nâng cấp Khung Năng lực (Competency Upgrade)
+                     * Vai trò mục tiêu: AI/Data Engineer (Nam)
+                     *                      * Level hiện tại: Gần L2 (AI Practitioner) — Đã biết gọi LLM API, viết prompt cơ bản, xây luồng xử lý văn bản CV.
+                     *                      * Competency cần nâng cấp: LLM Evaluation & Benchmarking (Định lượng chất lượng AI) để tiến tới L3 (AI Builder).
+                     *                      * Hành động thực hành 30 ngày:
+                     * 
+                     * Xây dựng một bộ dataset chuẩn gồm 30 "Golden Test Cases" (chứa cả CV dễ, CV phức tạp, CV bẫy) kèm ground-truth đánh giá của chuyên viên nhân sự; tích hợp script tự động chấm điểm độ chính xác (Accuracy/Precision) sau mỗi lần cập nhật pipeline.
+                     * 3. Kế hoạch Phát triển 30 Ngày (Growth Plan)
+Vấn đề ưu tiên
+	Hành động cụ thể 30 ngày (Action)
+	Owner
+	Deadline
+	Dấu hiệu hoàn thành (Definite Output)
+	1. Đánh giá chất lượng AI thiếu ổn định
+	Xây dựng bộ 30 Golden Cases & viết script chạy test tự động độ lệch đánh giá (Eval Script) trước mỗi đợt deploy.
+	Nam
+	15/09/2026
+	Bộ file eval_golden_dataset.json hoàn chỉnh và script trả về báo cáo % Match Rate tự động trong terminal.
+	2. Tốc độ đưa bản cập nhật cho HR test còn chậm
+	Đóng gói bản cập nhật backend thành API chuẩn và cấu hình 1 trang Web Demo trực tiếp trên môi trường staging.
+	Phước
+	20/09/2026
+	Link demo web hoạt động ổn định; Recruiter tải CV lên và nhận kết quả phân tích trong $\le 15$ giây.
+	3. Phản hồi của HR chưa được tổng hợp định kỳ
+	Tổ chức buổi "Weekly Feedback Sync" 20 phút vào mỗi 16:00 Thứ Sáu với HR đối tác để ghi nhận các trường hợp AI chấm sai.
+	Hải
+	25/09/2026
+	File log ghi nhận ít nhất 10 feedback thực tế kèm phân loại lỗi (Lỗi trích xuất / Lỗi chấm điểm).
+	TỰ KIỂM TRA (GATE 4 CHECKLIST)
+                        * [x] Team Health: Đã chấm đủ 4 khía cạnh, có phân tích điểm số thấp nhất và tìm ra nguyên nhân cốt lõi.
+                        *                         * [x] Competency Upgrade: Chọn đúng 1 role cụ thể (AI Engineer), xác định rõ mốc chuyển dịch (L2 $\rightarrow$ L3) kèm 1 hành động rèn luyện cụ thể.
+                        *                         * [x] 30-Day Growth Plan: Tối đa 3 hành động, cam kết rõ ràng Hành động $\rightarrow$ 1 Owner duy nhất $\rightarrow$ Deadline chính xác $\rightarrow$ Dấu hiệu hoàn thành định lượng được.
+—-----------------------------------------------------------------------------

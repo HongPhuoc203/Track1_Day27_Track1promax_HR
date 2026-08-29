@@ -82,17 +82,28 @@
 
 ## TRANG 4: PHASE 4 - TEAM HEALTH & GROWTH PLAN
 
-### Đánh giá Team Health
-* **Tốc độ & Cộng tác:** Tốt (Embedded 3 người ra quyết định nhanh).
-* **Chất lượng AI:** Rủi ro Hallucination & Data Privacy; thiếu tập dữ liệu chuẩn.
-* **Competency Gap (L1 $\rightarrow$ L3):**
-  - Hải (L2): Cần lên L3 (Xây dựng hệ thống Rubric chuẩn mực HR).
-  - Nam (L2): Cần lên L3 (Làm chủ Eval Pipeline, tính False Negative).
-  - Phước (L2): Cần lên L3 (Tối ưu token cost, Zero-Data Retention).
+### 1. Đánh giá Team Health (Thang 1-5)
+| Khía cạnh | Phước | Hải | Nam | Trung bình |
+| :--- | :---: | :---: | :---: | :---: |
+| Chất lượng AI | 3 | 4 | 3 | **3.3** |
+| Tiến độ | 4 | 4 | 5 | **4.3** |
+| Tinh thần team | 5 | 5 | 5 | **5.0** |
+| Tốc độ ra sản phẩm | 4 | 4 | 4 | **4.0** |
 
-### 30-Day Growth Plan (Kế hoạch hành động 30 ngày)
-| Area | Hành động cụ thể (Action) | Owner | Deadline |
-| :--- | :--- | :--- | :--- |
-| **Domain Expertise**| Tổ chức 2 Workshop với HR Head để map tiêu chí chấm CV thủ công thành Prompt Rubric có trọng số. | **Hải** | Tuần 1 |
-| **AI Evaluation** | Setup dán nhãn Outsourcing 300 CV (Ground-Truth). Chạy test tính độ sai số, benchmark mô hình. | **Nam** | Tuần 2 |
-| **Tech/Compliance** | Hoàn thiện Module Data Masking chặn 100% PII. Lập bảng Unit Economics (API/CV) báo cáo Tech Lead. | **Phước** | Tuần 3 |
+### 2. Chọn vấn đề ưu tiên
+*   **Khía cạnh thấp nhất:** Chất lượng AI (Trung bình 3.3).
+*   **Lý do:** Team code MVP nhanh nhưng chưa có tập dữ liệu test chuẩn, tiềm ẩn rủi ro Hallucination và loại sai ứng viên (False Negative).
+*   **Ảnh hưởng:** Nếu không xử lý, HR Head sẽ từ chối dùng Pilot vì không tin tưởng độ chính xác của Agent.
+
+### 3. Chọn Competency cần nâng cấp
+*   **Role:** AI/Data Engineer (Nam)
+*   **Level hiện tại:** Gần L2 — AI Practitioner (Biết gọi API và viết Prompt).
+*   **Năng lực cần nâng:** Evals / Quality Evaluation (Kiểm định và đánh giá).
+*   **Action trong 30 ngày:** Xây dựng bộ test set 300 CV và setup Eval Pipeline chạy tự động mỗi lần update mô hình.
+
+### 4. Growth Plan 30 ngày
+| Vấn đề ưu tiên | Hành động 30 ngày | Owner | Deadline | Dấu hiệu hoàn thành |
+| :--- | :--- | :--- | :--- | :--- |
+| **Thiếu Eval Pipeline** | Thuê CTV dán nhãn 300 CV. Code module test tự động so sánh output của Agent với nhãn. | **Nam** | 15/10/2026 | Output ra file CSV tính được chính xác % False Negative. |
+| **Rubric chưa chuẩn** | Làm việc với HR Head để map tiêu chí thủ công thành Prompt Rubric có trọng số. | **Hải** | 08/10/2026 | Ra tài liệu "CV Scoring Rubric" có confirm của HR. |
+| **Rủi ro lộ PII** | Code Module Data Masking chặn 100% PII (Tên, SDT, Email) trước khi gọi API. | **Phước**| 22/10/2026 | Log API chứng minh không có PII nào lọt ra ngoài. |
